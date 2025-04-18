@@ -1,0 +1,255 @@
+<html>
+
+<head>
+
+	<script>
+		let quartosDisponiveis = [	
+		1,2,3,4,5,6,7,8,9,10,
+		11,12,13,14,15,16,17,18,19,20
+		];
+
+		let hotel = 'Habbo Hotel';
+		alert(`Bem-vindo ao ${hotel}`);
+		
+		let nomeDoUsuario = prompt('Digite seu nome');
+		
+		verificando_acesso();
+		
+		function verificando_acesso(){
+			if(nomeDoUsuario == '' || Number(nomeDoUsuario)){
+				alert('Por favor insira um nome válido')
+				nomeDoUsuario = prompt('Digite seu nome');
+				verificando_acesso();
+			}
+		}
+		
+		// acesso();
+
+		function acesso(){
+				let senha = parseInt(prompt('Digite sua senha'))
+				if(senha != 2678){
+					alert('Acesso não autorizado')
+					acesso();
+				}
+			}
+
+		alert(`Bem vindo ao ${hotel}, ${nomeDoUsuario}. É um imenso prazer ter você por aqui!`);
+
+		function inicio() {
+
+			var escolha = parseInt(prompt('Selecione uma opção:\n' + 
+			'1.) Reserva de Quartos\n' +
+			'2.) Cadastro de Hóspedes\n' +
+			'3.) Abastecimento de Carros\n' + 
+			'4.) Cadastro e Pesquisa\n' + 
+			'5.) Sair' 
+			));
+
+			switch (escolha){
+				case 1:{
+				reserva_quartos();
+				break;
+			} 	case 2:{
+				cadastro_hospedes();
+				break;
+			} 	case 3:{
+				abastecer_carros();
+				break;
+			} 	case 4:{
+				cadastro_pesquisa();
+				break;
+			} 	case 5:{
+				sair();
+				break
+			}	default:{
+				erro();
+				break
+			}
+	}		
+
+		function reserva_quartos() {
+			alert(`HOTEL ${hotel} - RESERVA DE QUARTOS`);
+			alert(`Quartos disponíveis\n` + quartosDisponiveis.join('\n'))
+			dias_de_hospedagem();
+
+			function dias_de_hospedagem(){
+				let dias = Number(prompt('Digite os dias'))
+				let diaria = Number(prompt('Valor da diária'))
+
+				if ( diaria <= 0 || isNaN(dias)){
+					alert('Valor inválido')
+					dias_de_hospedagem();
+				} else if (diaria > 30 || isNaN(diaria)){
+					alert('Valor inválido')
+					dias_de_hospedagem();
+				}
+
+
+				let valorDiaria = dias * diaria
+				alert(`O valor de ${dias} dias de hospedagem é R$${valorDiaria} `);
+
+				hospedagem();
+
+				function hospedagem(){
+					let quartoEscolhido = Number(prompt('Digite o número do quarto'))
+					let nomeDoHospede = prompt('Nome do hospede')
+
+					if(quartoEscolhido == '' || isNaN(quartoEscolhido)){
+						alert('Valor inválido')
+						hospedagem();
+						} else {
+							if (nomeDoHospede == '' || !isNaN(nomeDoHospede)){			
+							alert('Nome não registrado!')	
+							hospedagem()			
+							} else {							
+							if (quartosDisponiveis.includes(quartoEscolhido)){
+							quartosDisponiveis.splice(quartosDisponiveis.indexOf(quartoEscolhido), 1);
+							alert('Você reservou este quarto!')
+						}
+					}
+
+					let confirmar = prompt(`${nomeDoUsuario} você confirma a hospedagem para ${nomeDoHospede} por ${dias} para o quarto ${quartoEscolhido} por R$${valorDiaria} ?\nS\nN`).toUpperCase()
+					
+					switch(confirmar){
+						case 'S':
+							alert(`${nomeDoUsuario}, reserva efetuada para ${nomeDoHospede}`)
+						  let statusQuartos = '';
+
+						  for(let i = 1; i <= 20; i++){
+							  if(quartosDisponiveis.includes(i)){
+								  statusQuartos += `${i} - livre\n`;
+							  }else{
+								  statusQuartos += `${i} - ocupado\n`;
+							  }
+						  }
+						  
+						  alert(`Quartos: \n${statusQuartos}`);
+							break;
+					   }
+			  }
+		  }
+				
+		}
+	}
+
+		
+		function cadastro_pesquisa(){
+			let hospedeCadastrado = [];
+
+			let cadastroPesquisa = parseInt(prompt('Selecione uma opção\n' +
+				'1.) Cadastrar\n' +
+				'2.) Pesquisar\n' +
+				'3.) Listar\n' +
+				'4.) Sair\n' 
+			));
+
+			switch (cadastroPesquisa){
+			 	case 1:{
+				 while (hospedeCadastrado.length < 2){
+					 chamarHospede = prompt('Qual o nome do hóspede ?')
+					 hospedeCadastrado.push(chamarHospede) 
+				 }
+	
+				 if (hospedeCadastrado.length == 2){
+					 alert('Máximo de cadastros atingido')
+					 cadastro_pesquisa();
+				 } else {
+					 cadastro_pesquisa();
+					 break;
+				 }
+			 	} case 2: {
+					let nomePesquisado = prompt('Pesquise o nome do Hóspede')
+
+					if (hospedeCadastrado.includes(nomePesquisado)){
+						alert(`Hóspede ${nomePesquisado} foi encontrado`)
+						cadastro_pesquisa();
+					} else {
+						alert('Hóspede não encontrado')
+						cadastro_pesquisa();
+					}
+
+					break;
+			 	}
+
+				
+			} //switch case
+		} //cadastro_pesquisa
+			
+
+
+		function cadastro_hospedes() {
+			alert(`HOTEL ${hotel} - CADASTRO DE HÓSPEDES`);
+			let hospedes = [];
+			let totalHospedes = 0;
+			let gratuidade = 0;
+			let meia = 0;
+			
+			let valorDiaria = Number(prompt('Qual o valor da diária ?'));
+			while(isNaN(valorDiaria) || valorDiaria <= 0){
+				alert('Coloque números válidos')
+				valorDiaria = Number(prompt('Qual o valor da diária ?'));
+			}
+
+			let hospede = prompt('Qual o nome do Hóspede?')
+
+			while(hospede !== 'PARE'){
+				if(hospede === '' || !isNaN(hospede)){
+					alert('Nome inválido')
+				} else {
+				let idadeHospede = Number(prompt('Qual a idade do hóspede?'));
+			
+				while (isNaN(idadeHospede) || idadeHospede < 0) {
+				alert("Idade inválida");
+				idadeHospede = Number(prompt('Qual a idade do hóspede?'));
+				}
+				
+				if (idadeHospede <= 6){
+					alert(`${hospede} cadastro(a) com sucesso.Possui gratuidade`)
+					gratuidade++
+					totalHospedes += valorDiaria
+				} else if (idadeHospede >= 60){
+					alert(`${hospede} cadastro com sucesso.Possui meia`)
+					meia++
+					totalHospedes += valorDiaria
+				} else {
+					alert(`${hospede} cadastro com sucesso`)
+					totalHospedes += valorDiaria;
+				}
+			}
+			hospede = prompt('Digite o nome do próximo hóspede( ou "PARE" para encerrar)').toUpperCase();
+		}
+		alert(`${nomeDoUsuario}, o valor total das hóspedagns é: R$${totalHospedes}, ${gratuidade} gratuidade(s); ${meia} meia(s)`)
+		inicio();
+	}
+
+		function abastecer_carros() {
+			alert(`HOTEL ${hotel} - ABASTECER`);
+			inicio();
+		}
+
+		function erro() {
+			alert('Por favor, informe um número entre 1 e 4');
+			inicio();
+		}
+
+		function sair() {
+			var confirma = confirm('Você deseja sair?');
+			if (confirma) {
+				alert(`Muito obrigado e até logo, ${nomeDoUsuario}`)
+				window.close();
+			} else {
+				inicio();
+			}
+		}
+
+	}
+		
+		inicio();
+	</script>
+</head>
+
+<body>
+
+</body>
+
+</html>
