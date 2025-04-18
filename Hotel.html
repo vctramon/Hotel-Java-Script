@@ -46,25 +46,25 @@
 			));
 
 			switch (escolha){
-				case 1:{
+				case 1:
 				reserva_quartos();
 				break;
-			} 	case 2:{
+			 	case 2:
 				cadastro_hospedes();
 				break;
-			} 	case 3:{
+			 	case 3:
 				abastecer_carros();
 				break;
-			} 	case 4:{
+			 	case 4:
 				cadastro_pesquisa();
 				break;
-			} 	case 5:{
+			 	case 5:
 				sair();
 				break
-			}	default:{
+				default:
 				erro();
 				break
-			}
+			
 	}		
 
 		function reserva_quartos() {
@@ -135,46 +135,40 @@
 		
 		function cadastro_pesquisa(){
 			let hospedeCadastrado = [];
+			let opcao = 0;
 
-			let cadastroPesquisa = parseInt(prompt('Selecione uma opção\n' +
-				'1.) Cadastrar\n' +
-				'2.) Pesquisar\n' +
-				'3.) Listar\n' +
-				'4.) Sair\n' 
+			while (opcao !== 4){
+				opcao = parseInt(prompt('Menu:\n' +
+				'1) Cadastrar\n' +
+				'2) Pesquisar\n' +
+				'3) Listar\n' +
+				'4) Sair'
 			));
 
-			switch (cadastroPesquisa){
-			 	case 1:{
-				 while (hospedeCadastrado.length < 2){
-					 chamarHospede = prompt('Qual o nome do hóspede ?')
-					 hospedeCadastrado.push(chamarHospede) 
-				 }
-	
-				 if (hospedeCadastrado.length == 2){
-					 alert('Máximo de cadastros atingido')
-					 cadastro_pesquisa();
-				 } else {
-					 cadastro_pesquisa();
-					 break;
-				 }
-			 	} case 2: {
-					let nomePesquisado = prompt('Pesquise o nome do Hóspede')
-
-					if (hospedeCadastrado.includes(nomePesquisado)){
-						alert(`Hóspede ${nomePesquisado} foi encontrado`)
-						cadastro_pesquisa();
+			switch (opcao){
+				case 1:
+					if (hospedeCadastrado.length >= 2) {
+						alert('Máximo de Hóspede cadastrado')
 					} else {
-						alert('Hóspede não encontrado')
-						cadastro_pesquisa();
+						hospedeCadastrado.push(prompt('Nome do hóspede:'))
+						alert('Hóspede cadastrado com sucesso')
 					}
-
+					break;	
+				case 2:
+					let pesquisarHospede = prompt('Coloque o nome do hóspede')
+					alert(hospedeCadastrado.includes(pesquisarHospede) ? 'Hóspede encontrado' : 'Hóspede não encontrado');
 					break;
-			 	}
-
-				
-			} //switch case
-		} //cadastro_pesquisa
-			
+				case 3:
+					if(hospedeCadastrado.length){
+						alert('Hóspedes do hotel:\n ' + hospedeCadastrado.join('\n'));
+					}
+					break;				
+				case 4:
+					inicio();
+					break;
+				}
+		}
+	}
 
 
 		function cadastro_hospedes() {
@@ -224,6 +218,13 @@
 
 		function abastecer_carros() {
 			alert(`HOTEL ${hotel} - ABASTECER`);
+			let combustivel = 42;
+
+			let acoolWayne = Number(prompt('Qual o valor do álcool no posto Wayne ?'));
+			let gasolinalWayne = Number(prompt('Qual o valor do gasolina no posto Wayne ?'));
+			let acoolStark = Number(prompt('Qual o valor do álcool no posto Stark ?'));
+			let gasolinaStark = Number(prompt('Qual o valor da gasolina no posto Stark ?'));
+			
 			inicio();
 		}
 
