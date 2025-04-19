@@ -44,7 +44,8 @@
 				'3.) Abastecimento de Carros\n' +
 				'4.) Cadastro e Pesquisa\n' +
 				'5.) Eventos\n' +
-				'6) Sair'
+				'6.) Ar condicionado\n' +
+				'7) Sair'
 			));
 
 			switch (escolha) {
@@ -64,6 +65,9 @@
 					eventos();
 					break;
 				case 6:
+					arCondicionado();
+					break;
+				case 7:
 					sair();
 					break;
 				default:
@@ -149,7 +153,7 @@
 
 					switch (opcao) {
 						case 1:
-							if (hospedeCadastrado.length >= 2) {
+							if (hospedeCadastrado.length >= 15) {
 								alert('Máximo de Hóspede cadastrado')
 							} else {
 								hospedeCadastrado.push(prompt('Nome do hóspede:'))
@@ -266,37 +270,36 @@
 				inicio();
 			}
 
-	function eventos() {
-	let laranja = 150
-	let colorado = 350
-	let nomeDoAuditorio;
- 
- let numeroConvidados = Number(prompt('Coloque o número de convidados'))
- 
- while(numeroConvidados <= 0 || numeroConvidados == ''){
-	 alert('Por favor insira números válidos')
-	 numeroConvidados = Number(prompt('Coloque o número de convidador'));
-	}	
-	
-	while(numeroConvidados > 350){
-		alert('Quantidade de convidados superior à capacidade máxima')
-		numeroConvidados = Number(prompt('Coloque o número de convidador'));
-	}
-					
-	let cadeirasLaranja = numeroConvidados < laranja ? laranja - numeroConvidados : 220 - numeroConvidados;
-	
-	if (numeroConvidados < 220 ){
-		alert(`Use o auditório Laranja (inclua mais ${cadeirasLaranja} cadeiras)`)
-		alert('Agora vamos ver a agenda do evento.');
-		nomeDoAuditorio = 'Laranja'
-		agenda();
-	} else {
-		alert('Use o auditório Colorado')
-		alert('Agora vamos ver a agenda do evento.');
-		nomeDoAuditorio = 'Colorado'
-		agenda();
-	}
-	
+			function eventos() {
+				let laranja = 150
+				let colorado = 350
+				let nomeDoAuditorio;			
+				let numeroConvidados = Number(prompt('Coloque o número de convidados'))
+			
+			while(numeroConvidados <= 0 || numeroConvidados == ''){
+				alert('Por favor insira números válidos')
+				numeroConvidados = Number(prompt('Coloque o número de convidador'));
+				}	
+				
+				while(numeroConvidados > 350){
+					alert('Quantidade de convidados superior à capacidade máxima')
+					numeroConvidados = Number(prompt('Coloque o número de convidador'));
+				}
+								
+				let cadeirasLaranja = numeroConvidados < laranja ? laranja - numeroConvidados : 220 - numeroConvidados;
+				
+				if (numeroConvidados < 220 ){
+					alert(`Use o auditório Laranja (inclua mais ${cadeirasLaranja} cadeiras)`)
+					alert('Agora vamos ver a agenda do evento.');
+					nomeDoAuditorio = 'Laranja'
+					agenda();
+				} else {
+					alert('Use o auditório Colorado')
+					alert('Agora vamos ver a agenda do evento.');
+					nomeDoAuditorio = 'Colorado'
+					agenda();
+				}
+				
 	function agenda(){
 	let diaSemana = ['segunda','terça','quarta','quinta','sexta'];
 	let finalSemana = ['sabado','domingo'];
@@ -370,11 +373,58 @@
 			}
 	}
 }
+			
+			function arCondicionado(){
+			let empresa = [];
+			let valorAparelho = [];
+			let quantidadeAparelho = [];
+			let porcentagemDesconto = [];
+			let minimoAparelho = [];
+			let totalAparelhos = [];
+			
+			let nomeDaEmpresa = prompt('Qual o nome da empresa ?')
+			empresa.push(nomeDaEmpresa);
+			let valorDoAparelho = Number(prompt('Qual o valor do aparelho?'));
+			valorAparelho.push(valorDoAparelho);
+			let quantosAparelhos = Number(prompt('Qual a quantidade de aparelhos?'));
+			quantidadeAparelho.push(quantosAparelhos);
+			let qualPorcentagem = Number(prompt('Qual a porcentagem de desconto?') / 100);
+			porcentagemDesconto.push(qualPorcentagem);
+			let aparelhosMinimos = Number(prompt('Qual o número mínimo de aparelhos para conseguir o desconto?'));
+			minimoAparelho.push(aparelhosMinimos);
+			
+			let descontoCalculado = (quantosAparelhos >= aparelhosMinimos) ? (valorDoAparelho * quantosAparelhos) * qualPorcentagem : 0;
+
+			let total = (valorDoAparelho * quantosAparelhos) - descontoCalculado;
+			totalAparelhos.push(total);
+			
+			let novaEmpresa = prompt(`Deseja informar novos dados, ${nomeDoUsuario}?\n` +
+									'S\n' +
+									'N'
+									)
+			 
+			
+			if(novaEmpresa !== 'n'){				
+				arCondicionado();
+				} else	{
+					let menorValor = totalAparelhos[0];
+					let empresaMenor = empresa[0];
+
+					for (let i = 1; i < totalAparelhos.length; i++){
+						if(totalAparelhos[i] < menorValor){
+							menorValor = totalAparelhos[i];
+							empresaMenor = empresa[i]
+						}
+					}
+
+					alert(`O orçamento de menor valor é o ${empresaMenor} por R$${menorValor.toFixed(2)}`);
+				} 
+	}		
 			function erro() {
 				alert('Por favor, informe um número entre 1 e 4');
 				inicio();
 			}
-
+			
 			function sair() {
 				var confirma = confirm('Você deseja sair?');
 				if (confirma) {
