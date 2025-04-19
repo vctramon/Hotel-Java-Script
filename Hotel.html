@@ -3,285 +3,373 @@
 <head>
 
 	<script>
-		
-		let quartosDisponiveis = [	
-		1,2,3,4,5,6,7,8,9,10,
-		11,12,13,14,15,16,17,18,19,20
+
+		let quartosDisponiveis = [
+			1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+			11, 12, 13, 14, 15, 16, 17, 18, 19, 20
 		];
 
 		let hotel = 'Habbo Hotel';
 		alert(`Bem-vindo ao ${hotel}`);
-		
+
 		let nomeDoUsuario = prompt('Digite seu nome');
-		
+
 		verificando_acesso();
-		
-		function verificando_acesso(){
-			if(nomeDoUsuario == '' || Number(nomeDoUsuario)){
+
+		function verificando_acesso() {
+			if (nomeDoUsuario == '' || Number(nomeDoUsuario)) {
 				alert('Por favor insira um nome válido')
 				nomeDoUsuario = prompt('Digite seu nome');
 				verificando_acesso();
 			}
 		}
-		
+
 		// acesso();
 
-		function acesso(){
-				let senha = parseInt(prompt('Digite sua senha'))
-				if(senha != 2678){
-					alert('Acesso não autorizado')
-					acesso();
-				}
+		function acesso() {
+			let senha = parseInt(prompt('Digite sua senha'))
+			if (senha != 2678) {
+				alert('Acesso não autorizado')
+				acesso();
 			}
+		}
 
 		alert(`Bem vindo ao ${hotel}, ${nomeDoUsuario}. É um imenso prazer ter você por aqui!`);
 
 		function inicio() {
 
-			var escolha = parseInt(prompt('Selecione uma opção:\n' + 
-			'1.) Reserva de Quartos\n' +
-			'2.) Cadastro de Hóspedes\n' +
-			'3.) Abastecimento de Carros\n' + 
-			'4.) Cadastro e Pesquisa\n' + 
-			'5.) Sair' 
+			var escolha = parseInt(prompt('Selecione uma opção:\n' +
+				'1.) Reserva de Quartos\n' +
+				'2.) Cadastro de Hóspedes\n' +
+				'3.) Abastecimento de Carros\n' +
+				'4.) Cadastro e Pesquisa\n' +
+				'5.) Eventos\n' +
+				'6) Sair'
 			));
 
-			switch (escolha){
+			switch (escolha) {
 				case 1:
-				reserva_quartos();
-				break;
-			 	case 2:
-				cadastro_hospedes();
-				break;
-			 	case 3:
-				abastecer_carros();
-				break;
-			 	case 4:
-				cadastro_pesquisa();
-				break;
-			 	case 5:
-				sair();
-				break
-				default:
-				erro();
-				break
-			
-	}		
-
-		function reserva_quartos() {
-			alert(`HOTEL ${hotel} - RESERVA DE QUARTOS`);
-			alert(`Quartos disponíveis\n` + quartosDisponiveis.join('\n'))
-			dias_de_hospedagem();
-
-		function dias_de_hospedagem(){
-			let dias = Number(prompt('Digite os dias'))
-			let diaria = Number(prompt('Valor da diária'))
-
-			if ( diaria <= 0 || isNaN(dias)){
-				alert('Valor inválido')
-				dias_de_hospedagem();
-			} else if (diaria > 30 || isNaN(diaria)){
-				alert('Valor inválido')
-				dias_de_hospedagem();
-			}
-
-
-		let valorDiaria = dias * diaria
-		alert(`O valor de ${dias} dias de hospedagem é R$${valorDiaria} `);
-
-		hospedagem();
-
-		function hospedagem(){
-		let quartoEscolhido = Number(prompt('Digite o número do quarto'))
-		let nomeDoHospede = prompt('Nome do hospede')
-
-		if(quartoEscolhido == '' || isNaN(quartoEscolhido)){
-			alert('Valor inválido')
-			hospedagem();
-		} else {
-			if (nomeDoHospede == '' || !isNaN(nomeDoHospede)){			
-			alert('Nome não registrado!')	
-			hospedagem()			
-		} else {							
-			if (quartosDisponiveis.includes(quartoEscolhido)){
-			quartosDisponiveis.splice(quartosDisponiveis.indexOf(quartoEscolhido), 1);
-			alert('Você reservou este quarto!')
-			}
-		}	
-
-		let confirmar = prompt(`${nomeDoUsuario} você confirma a hospedagem para ${nomeDoHospede} por ${dias} para o quarto ${quartoEscolhido} por R$${valorDiaria} ?\nS\nN`).toUpperCase()
-					
-		switch(confirmar){
-		case 'S':
-		alert(`${nomeDoUsuario}, reserva efetuada para ${nomeDoHospede}`)
-		let statusQuartos = '';
-
-		for(let i = 1; i <= 20; i++){
-			if(quartosDisponiveis.includes(i)){
-			statusQuartos += `${i} - livre\n`;
-		} else {
-			statusQuartos += `${i} - ocupado\n`;
-			}
-		}
-						  
-			alert(`Quartos: \n${statusQuartos}`);
-			break;
-		    }
-		   }
-		  }				
-		 }
-		}
-
-		
-		function cadastro_pesquisa(){
-			let hospedeCadastrado = [];
-			let opcao = 0;
-
-			while (opcao !== 4){
-				opcao = parseInt(prompt('Menu:\n' +
-				'1) Cadastrar\n' +
-				'2) Pesquisar\n' +
-				'3) Listar\n' +
-				'4) Sair'
-			));
-
-			switch (opcao){
-				case 1:
-					if (hospedeCadastrado.length >= 2) {
-						alert('Máximo de Hóspede cadastrado')
-					} else {
-						hospedeCadastrado.push(prompt('Nome do hóspede:'))
-						alert('Hóspede cadastrado com sucesso')
-					}
-					break;	
+					reserva_quartos();
+					break;
 				case 2:
-					let pesquisarHospede = prompt('Coloque o nome do hóspede')
-					alert(hospedeCadastrado.includes(pesquisarHospede) ? 'Hóspede encontrado' : 'Hóspede não encontrado');
+					cadastro_hospedes();
 					break;
 				case 3:
-					if(hospedeCadastrado.length){
-						alert('Hóspedes do hotel:\n ' + hospedeCadastrado.join('\n'));
-					}
-					break;				
-				case 4:
-					inicio();
+					abastecer_carros();
 					break;
-				}
-		}
-	}
-
-
-		function cadastro_hospedes() {
-			alert(`HOTEL ${hotel} - CADASTRO DE HÓSPEDES`);
-			let hospedes = [];
-			let totalHospedes = 0;
-			let gratuidade = 0;
-			let meia = 0;
-			
-			let valorDiaria = Number(prompt('Qual o valor da diária ?'));
-			while(isNaN(valorDiaria) || valorDiaria <= 0){
-				alert('Coloque números válidos')
-				valorDiaria = Number(prompt('Qual o valor da diária ?'));
+				case 4:
+					cadastro_pesquisa();
+					break;
+				case 5:
+					eventos();
+					break;
+				case 6:
+					sair();
+					break;
+				default:
+					erro();
+					break;
 			}
 
-			let hospede = prompt('Qual o nome do Hóspede?')
+			function reserva_quartos() {
+				alert(`HOTEL ${hotel} - RESERVA DE QUARTOS`);
+				alert(`Quartos disponíveis\n` + quartosDisponiveis.join('\n'))
+				dias_de_hospedagem();
 
-			while(hospede !== 'PARE'){
-				if(hospede === '' || !isNaN(hospede)){
-					alert('Nome inválido')
-				} else {
-				let idadeHospede = Number(prompt('Qual a idade do hóspede?'));
-			
-				while (isNaN(idadeHospede) || idadeHospede < 0) {
-				alert("Idade inválida");
-				idadeHospede = Number(prompt('Qual a idade do hóspede?'));
-				}
-				
-				if (idadeHospede <= 6){
-					alert(`${hospede} cadastro(a) com sucesso.Possui gratuidade`)
-					gratuidade++
-					totalHospedes += valorDiaria
-				} else if (idadeHospede >= 60){
-					alert(`${hospede} cadastro com sucesso.Possui meia`)
-					meia++
-					totalHospedes += valorDiaria
-				} else {
-					alert(`${hospede} cadastro com sucesso`)
-					totalHospedes += valorDiaria;
-				}
-			}
-			hospede = prompt('Digite o nome do próximo hóspede( ou "PARE" para encerrar)').toUpperCase();
-		}
-		alert(`${nomeDoUsuario}, o valor total das hóspedagns é: R$${totalHospedes}, ${gratuidade} gratuidade(s); ${meia} meia(s)`)
-		inicio();
-	}
+				function dias_de_hospedagem() {
+					let dias = Number(prompt('Digite os dias'))
+					let diaria = Number(prompt('Valor da diária'))
 
-		function abastecer_carros() {
-			alert(`HOTEL ${hotel} - ABASTECER`);
-			let combustivel = 42;
-			let desconto 
+					if (diaria <= 0 || isNaN(dias)) {
+						alert('Valor inválido')
+						dias_de_hospedagem();
+					} else if (diaria > 30 || isNaN(diaria)) {
+						alert('Valor inválido')
+						dias_de_hospedagem();
+					}
 
-			let alcoolWayne = Number(prompt('Qual o valor do álcool no posto Wayne ?'));
-			let gasolinaWayne = Number(prompt('Qual o valor do gasolina no posto Wayne ?'));
-			let alcoolStark = Number(prompt('Qual o valor do álcool no posto Stark ?'));
-			let gasolinaStark = Number(prompt('Qual o valor da gasolina no posto Stark ?'));
 
-			let wayneGasolina = combustivel * gasolinaWayne;
-			let wayneAlcool = combustivel * alcoolWayne;
-			let descontoWayne = wayneGasolina * 0.30
-			let comparaWayne =  wayneGasolina - descontoWayne;
+					let valorDiaria = dias * diaria
+					alert(`O valor de ${dias} dias de hospedagem é R$${valorDiaria} `);
 
-			let starkGasolina = combustivel * gasolinaStark;
-			let starkAlcool = combustivel * alcoolStark;
-			let descontoStark = starkGasolina * 0.30;
-			let comparaStark = starkGasolina - descontoStark
+					hospedagem();
 
-			if (gasolinaWayne > gasolinaStark && alcoolWayne > alcoolStark){
-				if (comparaStark > starkAlcool){
-					alert('É mais barato abastecer com álcool no posto Stark Petrol')
-				} else {
-					alert('É mais barato abasterce gasolina no posto Stark Petrol')
-				} 
-			} else if (gasolinaWayne < gasolinaStark && alcoolWayne < alcoolStark){
-				if (comparaWayne > alcoolWayne){
-					alert('É mais barato abastecer com álcool no posto Wayne Oil')
-				} else {
-					alert('É mais barato abastecer com gasolina no posto Wayne Oil')
-				}
-			} else if (gasolinaWayne > gasolinaStark && alcoolWayne < alcoolStark){
-				if(comparaStark > alcoolStark){
-					alert('É mais barato abastecer com álcool no posto Stark Petrol')
-				} else {
-					alert('É mais barato abastecer com gasolina no posto Stark Petrol')
-				}
-			} else if (gasolinaWayne < gasolinaStark && alcoolWayne > alcoolStark){
-				if(comparaWayne > alcoolWayne){
-					alert('É mais barato abastecer com álcool no posto Wayne Oil')
-				} else {
-					alert('É mais barato abastecer com gasolina no ponto Wayne Oil')
+					function hospedagem() {
+						let quartoEscolhido = Number(prompt('Digite o número do quarto'))
+						let nomeDoHospede = prompt('Nome do hospede')
+
+						if (quartoEscolhido == '' || isNaN(quartoEscolhido)) {
+							alert('Valor inválido')
+							hospedagem();
+						} else {
+							if (nomeDoHospede == '' || !isNaN(nomeDoHospede)) {
+								alert('Nome não registrado!')
+								hospedagem()
+							} else {
+								if (quartosDisponiveis.includes(quartoEscolhido)) {
+									quartosDisponiveis.splice(quartosDisponiveis.indexOf(quartoEscolhido), 1);
+									alert('Você reservou este quarto!')
+								}
+							}
+
+							let confirmar = prompt(`${nomeDoUsuario} você confirma a hospedagem para ${nomeDoHospede} por ${dias} para o quarto ${quartoEscolhido} por R$${valorDiaria} ?\nS\nN`).toUpperCase()
+
+							switch (confirmar) {
+								case 'S':
+									alert(`${nomeDoUsuario}, reserva efetuada para ${nomeDoHospede}`)
+									let statusQuartos = '';
+
+									for (let i = 1; i <= 20; i++) {
+										if (quartosDisponiveis.includes(i)) {
+											statusQuartos += `${i} - livre\n`;
+										} else {
+											statusQuartos += `${i} - ocupado\n`;
+										}
+									}
+
+									alert(`Quartos: \n${statusQuartos}`);
+									break;
+							}
+						}
+					}
 				}
 			}
 
-		}
-		inicio();
+			function cadastro_pesquisa() {
+				let hospedeCadastrado = [];
+				let opcao = 0;
 
-		function erro() {
-			alert('Por favor, informe um número entre 1 e 4');
-			inicio();
-		}
+				while (opcao !== 4) {
+					opcao = parseInt(prompt('Menu:\n' +
+						'1) Cadastrar\n' +
+						'2) Pesquisar\n' +
+						'3) Listar\n' +
+						'4) Sair'
+					));
 
-		function sair() {
-			var confirma = confirm('Você deseja sair?');
-			if (confirma) {
-				alert(`Muito obrigado e até logo, ${nomeDoUsuario}`)
-				window.close();
-			} else {
+					switch (opcao) {
+						case 1:
+							if (hospedeCadastrado.length >= 2) {
+								alert('Máximo de Hóspede cadastrado')
+							} else {
+								hospedeCadastrado.push(prompt('Nome do hóspede:'))
+								alert('Hóspede cadastrado com sucesso')
+							}
+							break;
+						case 2:
+							let pesquisarHospede = prompt('Coloque o nome do hóspede')
+							alert(hospedeCadastrado.includes(pesquisarHospede) ? 'Hóspede encontrado' : 'Hóspede não encontrado');
+							break;
+						case 3:
+							if (hospedeCadastrado.length) {
+								alert('Hóspedes do hotel:\n ' + hospedeCadastrado.join('\n'));
+							}
+							break;
+						case 4:
+							inicio();
+							break;
+					}
+				}
+			}
+
+			function cadastro_hospedes() {
+				alert(`HOTEL ${hotel} - CADASTRO DE HÓSPEDES`);
+				let hospedes = [];
+				let totalHospedes = 0;
+				let gratuidade = 0;
+				let meia = 0;
+
+				let valorDiaria = Number(prompt('Qual o valor da diária ?'));
+				while (isNaN(valorDiaria) || valorDiaria <= 0) {
+					alert('Coloque números válidos')
+					valorDiaria = Number(prompt('Qual o valor da diária ?'));
+				}
+
+				let hospede = prompt('Qual o nome do Hóspede?')
+
+				while (hospede !== 'PARE') {
+					if (hospede === '' || !isNaN(hospede)) {
+						alert('Nome inválido')
+					} else {
+						let idadeHospede = Number(prompt('Qual a idade do hóspede?'));
+
+						while (isNaN(idadeHospede) || idadeHospede < 0) {
+							alert("Idade inválida");
+							idadeHospede = Number(prompt('Qual a idade do hóspede?'));
+						}
+
+						if (idadeHospede <= 6) {
+							alert(`${hospede} cadastro(a) com sucesso.Possui gratuidade`)
+							gratuidade++
+							totalHospedes += valorDiaria
+						} else if (idadeHospede >= 60) {
+							alert(`${hospede} cadastro com sucesso.Possui meia`)
+							meia++
+							totalHospedes += valorDiaria
+						} else {
+							alert(`${hospede} cadastro com sucesso`)
+							totalHospedes += valorDiaria;
+						}
+					}
+					hospede = prompt('Digite o nome do próximo hóspede( ou "PARE" para encerrar)').toUpperCase();
+				}
+				alert(`${nomeDoUsuario}, o valor total das hóspedagns é: R$${totalHospedes}, ${gratuidade} gratuidade(s); ${meia} meia(s)`)
 				inicio();
 			}
+
+			function abastecer_carros() {
+				alert(`HOTEL ${hotel} - ABASTECER`);
+				let combustivel = 42;
+				let desconto
+
+				let alcoolWayne = Number(prompt('Qual o valor do álcool no posto Wayne ?'));
+				let gasolinaWayne = Number(prompt('Qual o valor do gasolina no posto Wayne ?'));
+				let alcoolStark = Number(prompt('Qual o valor do álcool no posto Stark ?'));
+				let gasolinaStark = Number(prompt('Qual o valor da gasolina no posto Stark ?'));
+
+				let wayneGasolina = combustivel * gasolinaWayne;
+				let wayneAlcool = combustivel * alcoolWayne;
+				let descontoWayne = wayneGasolina * 0.30
+				let comparaWayne = wayneGasolina - descontoWayne;
+
+				let starkGasolina = combustivel * gasolinaStark;
+				let starkAlcool = combustivel * alcoolStark;
+				let descontoStark = starkGasolina * 0.30;
+				let comparaStark = starkGasolina - descontoStark
+
+				if (gasolinaWayne > gasolinaStark && alcoolWayne > alcoolStark) {
+					if (comparaStark > starkAlcool) {
+						alert('É mais barato abastecer com álcool no posto Stark Petrol')
+					} else {
+						alert('É mais barato abasterce gasolina no posto Stark Petrol')
+					}
+				} else if (gasolinaWayne < gasolinaStark && alcoolWayne < alcoolStark) {
+					if (comparaWayne > alcoolWayne) {
+						alert('É mais barato abastecer com álcool no posto Wayne Oil')
+					} else {
+						alert('É mais barato abastecer com gasolina no posto Wayne Oil')
+					}
+				} else if (gasolinaWayne > gasolinaStark && alcoolWayne < alcoolStark) {
+					if (comparaStark > alcoolStark) {
+						alert('É mais barato abastecer com álcool no posto Stark Petrol')
+					} else {
+						alert('É mais barato abastecer com gasolina no posto Stark Petrol')
+					}
+				} else if (gasolinaWayne < gasolinaStark && alcoolWayne > alcoolStark) {
+					if (comparaWayne > alcoolWayne) {
+						alert('É mais barato abastecer com álcool no posto Wayne Oil')
+					} else {
+						alert('É mais barato abastecer com gasolina no ponto Wayne Oil')
+					}
+				}
+
+				inicio();
+			}
+
+	function eventos() {
+	let laranja = 150
+	let colorado = 350
+	let nomeDoAuditorio;
+ 
+ let numeroConvidados = Number(prompt('Coloque o número de convidados'))
+ 
+ while(numeroConvidados <= 0 || numeroConvidados == ''){
+	 alert('Por favor insira números válidos')
+	 numeroConvidados = Number(prompt('Coloque o número de convidador'));
+	}	
+	
+	while(numeroConvidados > 350){
+		alert('Quantidade de convidados superior à capacidade máxima')
+		numeroConvidados = Number(prompt('Coloque o número de convidador'));
+	}
+	
+	let cadeirasLaranja = numeroConvidados < laranja ? laranja - numeroConvidados : numeroConvidados - laranja;
+	
+	if (numeroConvidados < 220 ){
+		alert(`Use o auditório Laranja (inclua mais ${cadeirasLaranja} cadeiras)`)
+		alert('Agora vamos ver a agenda do evento.');
+		nomeDoAuditorio = 'Laranja'
+		agenda();
+	} else {
+		alert('Use o auditório Colorado')
+		alert('Agora vamos ver a agenda do evento.');
+		nomeDoAuditorio = 'Colorado'
+		agenda();
+	}
+	
+	function agenda(){
+	let diaSemana = ['segunda','terça','quarta','quinta','sexta'];
+	let finalSemana = ['sabado','domingo'];
+
+	var diaEvento = prompt('Qual o dia do seu evento?')
+	var horaEvento = Number(prompt('Qual a hora do seu evento?'))
+
+		if (!diaSemana.includes(diaEvento) || horaEvento < 7){
+			alert('Auditório indisponível')
+			eventos();
+		} else if (diaSemana.includes(diaEvento) && horaEvento > 7 || horaEvento <= 23) {
+			var nomeEmpresa = prompt('Qual o nome da empresa?')
+			alert(`Auditório reservado para a loja ${nomeEmpresa}.${diaEvento} ás ${horaEvento} hrs`)
+		} else if (!finalSemana.includes(diaEvento) || horaEvento < 7 || horaEvento > 15) {
+			alert('Auditório indisponível')
+			eventos();
+		} else {
+			nomeEmpresa = prompt('Qual o nome da empresa?')
+			alert(`Auditório reservado para a loja ${nomeEmpresa}.${diaEvento} ás ${horaEvento}hrs`)
+		}
+	
+		
+			let duracaoEvento = Number(prompt('Qual a duração do evento em horas?'))
+		
+			 garconConvidado = Math.ceil(numeroConvidados/12)
+			 garconAdicional = Math.floor(duracaoEvento/2)
+			 totalGarcon = garconConvidado + garconAdicional  
+			 custo = totalGarcon * duracaoEvento * 10.50
+		
+			 alert(`São necessários ${totalGarcon} garçons \n` +
+					`Custo: R$${custo.toFixed(2)}\n` +
+					`Agora vamos calcular o custo do buffet do hotel para o evento`
+			 );
+		
+			cafe = numeroConvidados * 0.2
+			agua = numeroConvidados * 3
+			cento = numeroConvidados * 25	
+			
+			alert(`O evento precisará de ${cafe} litros de café, ${agua} litros de água e ${cento} salgados`)
+			
+			buffet = (cafe * 0.80) + (agua * 0.4) + (Math.floor(cento/100) * 35)
+			duracao = horaEvento + duracaoEvento;
+			totalEvento = custo + buffet;
+		
+			alert(`Evento no Auditório ${nomeDoAuditorio}.\n` +
+				  `Nome da Empresa: ${nomeEmpresa}.\n` +
+				  `Data: ${diaEvento}, ${horaEvento}H ás ${duracao}H.\n` +
+				  `Duração do evento: ${duracaoEvento}H.\n` +
+				  `Quantidade de garçons: ${totalGarcon}.\n` +
+				  `\nQuantidade de Convidadeo: ${numeroConvidados}.\n` +
+				  `Quantidade de garçons: R$${custo.toFixed(2)}.\n` +
+				  `Custo do Buffet: R$${buffet.toFixed(2)}.\n` +
+				  `\nValor total do Evento: R$${totalEvento.toFixed(2)}.`	
+			)
+	}
+}
+			function erro() {
+				alert('Por favor, informe um número entre 1 e 4');
+				inicio();
+			}
+
+			function sair() {
+				var confirma = confirm('Você deseja sair?');
+				if (confirma) {
+					alert(`Muito obrigado e até logo, ${nomeDoUsuario}`)
+					window.close();
+				} else {
+					inicio();
+				}
+			}
+
 		}
 
-	}
-		
 		inicio();
 	</script>
 </head>
