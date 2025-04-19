@@ -282,8 +282,8 @@
 		alert('Quantidade de convidados superior à capacidade máxima')
 		numeroConvidados = Number(prompt('Coloque o número de convidador'));
 	}
-	
-	let cadeirasLaranja = numeroConvidados < laranja ? laranja - numeroConvidados : numeroConvidados - laranja;
+					
+	let cadeirasLaranja = numeroConvidados < laranja ? laranja - numeroConvidados : 220 - numeroConvidados;
 	
 	if (numeroConvidados < 220 ){
 		alert(`Use o auditório Laranja (inclua mais ${cadeirasLaranja} cadeiras)`)
@@ -301,10 +301,10 @@
 	let diaSemana = ['segunda','terça','quarta','quinta','sexta'];
 	let finalSemana = ['sabado','domingo'];
 
-	var diaEvento = prompt('Qual o dia do seu evento?')
+	var diaEvento = prompt('Qual o dia da semana é o seu evento?')
 	var horaEvento = Number(prompt('Qual a hora do seu evento?'))
 
-		if (!diaSemana.includes(diaEvento) || horaEvento < 7){
+		if (!diaSemana.includes(diaEvento) || horaEvento < 7 || horaEvento > 23){
 			alert('Auditório indisponível')
 			eventos();
 		} else if (diaSemana.includes(diaEvento) && horaEvento > 7 || horaEvento <= 23) {
@@ -338,7 +338,7 @@
 			alert(`O evento precisará de ${cafe} litros de café, ${agua} litros de água e ${cento} salgados`)
 			
 			buffet = (cafe * 0.80) + (agua * 0.4) + (Math.floor(cento/100) * 35)
-			duracao = horaEvento + duracaoEvento;
+			duracao = horaEvento == 23 ? (22 - horaEvento) + duracaoEvento : horaEvento + duracaoEvento;
 			totalEvento = custo + buffet;
 		
 			alert(`Evento no Auditório ${nomeDoAuditorio}.\n` +
@@ -351,6 +351,23 @@
 				  `Custo do Buffet: R$${buffet.toFixed(2)}.\n` +
 				  `\nValor total do Evento: R$${totalEvento.toFixed(2)}.`	
 			)
+
+			let efetuarReserva = prompt(
+				'Gostaria de efetuar a reserva ?\n' +
+				's\n' +
+				'n'
+			);
+
+			switch(efetuarReserva){
+				case 's':
+					alert(`${nomeDoUsuario}, reserva efetuada com sucesso.`);
+					inicio();
+				break;
+				case 'n':
+					alert('Reserva não efetuada');
+					inicio();
+					break;
+			}
 	}
 }
 			function erro() {
