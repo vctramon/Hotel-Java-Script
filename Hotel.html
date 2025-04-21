@@ -24,7 +24,7 @@
 			}
 		}
 
-		// acesso();
+		acesso();
 
 		function acesso() {
 			let senha = parseInt(prompt('Digite sua senha'))
@@ -300,79 +300,79 @@
 					agenda();
 				}
 				
-	function agenda(){
-	let diaSemana = ['segunda','terça','quarta','quinta','sexta'];
-	let finalSemana = ['sabado','domingo'];
+				function agenda(){
+				let diaSemana = ['segunda','terça','quarta','quinta','sexta'];
+				let finalSemana = ['sabado','domingo'];
 
-	var diaEvento = prompt('Qual o dia da semana é o seu evento?')
-	var horaEvento = Number(prompt('Qual a hora do seu evento?'))
+				var diaEvento = prompt('Qual o dia da semana é o seu evento?')
+				var horaEvento = Number(prompt('Qual a hora do seu evento?'))
 
-		if (!diaSemana.includes(diaEvento) || horaEvento < 7 || horaEvento > 23){
-			alert('Auditório indisponível')
-			eventos();
-		} else if (diaSemana.includes(diaEvento) && horaEvento > 7 || horaEvento <= 23) {
-			var nomeEmpresa = prompt('Qual o nome da empresa?')
-			alert(`Auditório reservado para a loja ${nomeEmpresa}.${diaEvento} ás ${horaEvento} hrs`)
-		} else if (!finalSemana.includes(diaEvento) || horaEvento < 7 || horaEvento > 15) {
-			alert('Auditório indisponível')
-			eventos();
-		} else {
-			nomeEmpresa = prompt('Qual o nome da empresa?')
-			alert(`Auditório reservado para a loja ${nomeEmpresa}.${diaEvento} ás ${horaEvento}hrs`)
-		}
-	
-		
-			let duracaoEvento = Number(prompt('Qual a duração do evento em horas?'))
-		
-			 garconConvidado = Math.ceil(numeroConvidados/12)
-			 garconAdicional = Math.floor(duracaoEvento/2)
-			 totalGarcon = garconConvidado + garconAdicional  
-			 custo = totalGarcon * duracaoEvento * 10.50
-		
-			 alert(`São necessários ${totalGarcon} garçons \n` +
-					`Custo: R$${custo.toFixed(2)}\n` +
-					`Agora vamos calcular o custo do buffet do hotel para o evento`
-			 );
-		
-			cafe = numeroConvidados * 0.2
-			agua = numeroConvidados * 3
-			cento = numeroConvidados * 25	
-			
-			alert(`O evento precisará de ${cafe} litros de café, ${agua} litros de água e ${cento} salgados`)
-			
-			buffet = (cafe * 0.80) + (agua * 0.4) + (Math.floor(cento/100) * 35)
-			duracao = horaEvento == 23 ? (22 - horaEvento) + duracaoEvento : horaEvento + duracaoEvento;
-			totalEvento = custo + buffet;
-		
-			alert(`Evento no Auditório ${nomeDoAuditorio}.\n` +
-				  `Nome da Empresa: ${nomeEmpresa}.\n` +
-				  `Data: ${diaEvento}, ${horaEvento}H ás ${duracao}H.\n` +
-				  `Duração do evento: ${duracaoEvento}H.\n` +
-				  `Quantidade de garçons: ${totalGarcon}.\n` +
-				  `\nQuantidade de Convidadeo: ${numeroConvidados}.\n` +
-				  `Quantidade de garçons: R$${custo.toFixed(2)}.\n` +
-				  `Custo do Buffet: R$${buffet.toFixed(2)}.\n` +
-				  `\nValor total do Evento: R$${totalEvento.toFixed(2)}.`	
-			)
+					if (!diaSemana.includes(diaEvento) || horaEvento < 7 || horaEvento > 23){
+						alert('Auditório indisponível')
+						eventos();
+					} else if (diaSemana.includes(diaEvento) && horaEvento > 7 || horaEvento <= 23) {
+						var nomeEmpresa = prompt('Qual o nome da empresa?')
+						alert(`Auditório reservado para a loja ${nomeEmpresa}.${diaEvento} ás ${horaEvento} hrs`)
+					} else if (!finalSemana.includes(diaEvento) || horaEvento < 7 || horaEvento > 15) {
+						alert('Auditório indisponível')
+						eventos();
+					} else {
+						nomeEmpresa = prompt('Qual o nome da empresa?')
+						alert(`Auditório reservado para a loja ${nomeEmpresa}.${diaEvento} ás ${horaEvento}hrs`)
+					}
+				
+					
+						let duracaoEvento = Number(prompt('Qual a duração do evento em horas?'))
+					
+						garconConvidado = Math.ceil(numeroConvidados/12)
+						garconAdicional = Math.floor(duracaoEvento/2)
+						totalGarcon = garconConvidado + garconAdicional  
+						custo = totalGarcon * duracaoEvento * 10.50
+					
+						alert(`São necessários ${totalGarcon} garçons \n` +
+								`Custo: R$${custo.toFixed(2)}\n` +
+								`Agora vamos calcular o custo do buffet do hotel para o evento`
+						);
+					
+						cafe = numeroConvidados * 0.2
+						agua = numeroConvidados * 3
+						cento = numeroConvidados * 25	
+						
+						alert(`O evento precisará de ${cafe} litros de café, ${agua} litros de água e ${cento} salgados`)
+						
+						buffet = (cafe * 0.80) + (agua * 0.4) + (Math.floor(cento/100) * 35)
+						duracao = horaEvento == 23 ? (22 - horaEvento) + duracaoEvento : horaEvento + duracaoEvento;
+						totalEvento = custo + buffet;
+					
+						alert(`Evento no Auditório ${nomeDoAuditorio}.\n` +
+							`Nome da Empresa: ${nomeEmpresa}.\n` +
+							`Data: ${diaEvento}, ${horaEvento}H ás ${duracao}H.\n` +
+							`Duração do evento: ${duracaoEvento}H.\n` +
+							`Quantidade de garçons: ${totalGarcon}.\n` +
+							`\nQuantidade de Convidadeo: ${numeroConvidados}.\n` +
+							`Quantidade de garçons: R$${custo.toFixed(2)}.\n` +
+							`Custo do Buffet: R$${buffet.toFixed(2)}.\n` +
+							`\nValor total do Evento: R$${totalEvento.toFixed(2)}.`	
+						)
 
-			let efetuarReserva = prompt(
-				'Gostaria de efetuar a reserva ?\n' +
-				's\n' +
-				'n'
-			);
+						let efetuarReserva = prompt(
+							'Gostaria de efetuar a reserva ?\n' +
+							's\n' +
+							'n'
+						);
 
-			switch(efetuarReserva){
-				case 's':
-					alert(`${nomeDoUsuario}, reserva efetuada com sucesso.`);
-					inicio();
-				break;
-				case 'n':
-					alert('Reserva não efetuada');
-					inicio();
-					break;
+						switch(efetuarReserva){
+							case 's':
+								alert(`${nomeDoUsuario}, reserva efetuada com sucesso.`);
+								inicio();
+							break;
+							case 'n':
+								alert('Reserva não efetuada');
+								inicio();
+								break;
+						}
+				}
 			}
-	}
-}
 			
 			function arCondicionado(){
 			let empresa = [];
@@ -420,6 +420,7 @@
 					alert(`O orçamento de menor valor é o ${empresaMenor} por R$${menorValor.toFixed(2)}`);
 				} 
 	}		
+			
 			function erro() {
 				alert('Por favor, informe um número entre 1 e 4');
 				inicio();
